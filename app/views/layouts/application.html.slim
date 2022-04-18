@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title
+      | Taskleaf
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    .app-title.nevbar.nevbar-expand-md.nevbar-light.bg-light
+      .nevbar-brand Taskleaf
+    .container
+      = yield

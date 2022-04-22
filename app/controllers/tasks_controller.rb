@@ -28,9 +28,13 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new(task_params)#安全化されたtaskパラメータを取得
-    task.save!#データベースに保存
-    redirect_to tasks_url, notice: "タスク「#{task.name}」を登録しました。"#一覧画面に遷移させる
+    @task = Task.new(task_params)#安全化されたtaskパラメータを取得
+    #@=①前回操作したままの値をフォーム内に引き継いで表示できる。②検証エラーの内容をユーザーに対して表示できる。
+    if @task.save #データベースに保存
+      redirect_to @task, notice: "タスク「#{@task.name}」を登録しました。"#一覧画面に遷移させる（@taskがtasks_urlの場合)
+    else
+      render :new
+    end
   end
 
   private
